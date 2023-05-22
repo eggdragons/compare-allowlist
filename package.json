@@ -1,0 +1,30 @@
+{
+  "scripts": {
+    "create": "npm run createAllowlist &&  npm run createMerkle && npm run createEcdsa",
+    "createAllowlist": "npx ts-node --files ts-src/base/index.ts 64 && npx ts-node --files ts-src/base/index.ts 128 && npx ts-node --files ts-src/base/index.ts 256 && npx ts-node --files ts-src/base/index.ts 512 && npx ts-node --files ts-src/base/index.ts 1024",
+    "createMerkle": "npx ts-node --files ts-src/merkle/index.ts 64 && npx ts-node --files ts-src/merkle/index.ts 128 && npx ts-node --files ts-src/merkle/index.ts 256 && npx ts-node --files ts-src/merkle/index.ts 512 && npx ts-node --files ts-src/merkle/index.ts 1024",
+    "createEcdsa": "npx ts-node --files ts-src/ecdsa-etherjs/index.ts 64 && npx ts-node --files ts-src/ecdsa-etherjs/index.ts 128 && npx ts-node --files ts-src/ecdsa-etherjs/index.ts 256 && npx ts-node --files ts-src/ecdsa-etherjs/index.ts 512 && npx ts-node --files ts-src/ecdsa-etherjs/index.ts 1024",
+    "gasTest64": "set \"Len=64\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest128": "set \"Len=128\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest256": "set \"Len=256\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest512": "set \"Len=512\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest1024": "set \"Len=1024\" && forge test --match-test testGasReportCheckMintNormal",
+    "testReport": "npm run create && npm run gasTest64 && npm run gasTest128 && npm run gasTest256 && npm run gasTest512 && npm run gasTest1024 && npx ts-node --files ts-src/utils/combine.ts",
+    "gasTest64-mac": "export \"Len=64\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest128-mac": "export \"Len=128\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest256-mac": "export \"Len=256\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest512-mac": "export \"Len=512\" && forge test --match-test testGasReportCheckMintNormal",
+    "gasTest1024-mac": "export \"Len=1024\" && forge test --match-test testGasReportCheckMintNormal",
+    "testReport-mac": "npm run create && npm run gasTest64-mac && npm run gasTest128-mac && npm run gasTest256-mac && npm run gasTest512-mac && npm run gasTest1024-mac && npx ts-node --files ts-src/utils/combine.ts"
+  },
+  "dependencies": {
+    "@ethereumjs/util": "^8.0.6",
+    "ethereum-cryptography": "^2.0.0",
+    "ethers": "^6.4.0",
+    "merkletreejs": "^0.3.10"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
